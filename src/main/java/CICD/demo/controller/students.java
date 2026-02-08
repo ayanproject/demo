@@ -12,4 +12,8 @@ public class students {
    public ResponseEntity<?>getStudent(){
        return ResponseEntity.ok("This is all students :");
     }
+    @GetMapping("/name")
+    public ResponseEntity<?>getStudentName(){
+        return ResponseEntity.ok("my name is ayan :");
+    }
 }
