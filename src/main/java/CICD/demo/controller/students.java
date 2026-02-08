@@ -16,4 +16,8 @@ public class students {
     public ResponseEntity<?>getStudentName(){
         return ResponseEntity.ok("my name is ayan :");
     }
+    @GetMapping("/card")
+    public ResponseEntity<?>getStudentCard(){
+        return ResponseEntity.ok("my name is card :");
+    }
 }
