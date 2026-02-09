@@ -20,8 +20,5 @@ public class students {
     public ResponseEntity<?>getStudentCard(){
         return ResponseEntity.ok("my name is card :");
     }
-    @GetMapping("/school")
-    public ResponseEntity<?>getStudentSchool(){
-        return ResponseEntity.ok("my name is school :");
-    }
+
 }
