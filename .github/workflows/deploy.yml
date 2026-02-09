@@ -1,12 +1,27 @@
-- name: Deploy to EC2
-  uses: appleboy/ssh-action@v1.0.3
-  with:
-    host: ${{ secrets.EC2_HOST }}
-    username: ubuntu
-    key: ${{ secrets.EC2_SSH_KEY }}
-    script_stop: false
-    script: |
-      cd /home/ubuntu/apps/demo
-      git pull origin main
-      pkill -f demo-0.0.1-SNAPSHOT.jar || true
-      nohup java -jar target/demo-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
+name: Deploy Spring Boot App to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            cd /home/ubuntu/apps/demo
+            git pull origin main
+            ./mvnw clean package -DskipTests
+            pkill -f demo-0.0.1-SNAPSHOT.jar || true
+            nohup java -jar target/demo-0.0.1-SNAPSHOT.jar > app.log 2>&1 &
