@@ -20,5 +20,9 @@ public class students {
     public ResponseEntity<?>getStudentCard(){
         return ResponseEntity.ok("my name is card :");
     }
+    @GetMapping("/money")
+    public ResponseEntity<?>getStudentMoney(){
+        return ResponseEntity.ok("i have money  :");
+    }
 
 }
